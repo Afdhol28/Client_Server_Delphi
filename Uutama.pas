@@ -1,0 +1,83 @@
+unit Uutama;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, ImgList, ActnList, StdCtrls;
+
+type
+  TFormUtama = class(TForm)
+    MainMenu1: TMainMenu;
+    ActionList1: TActionList;
+    act2: TAction;
+    act3: TAction;
+    act4: TAction;
+    ImageList1: TImageList;
+    HOME1: TMenuItem;
+    LOGOUT1: TMenuItem;
+    KELUAR1: TMenuItem;
+    act5: TAction;
+    master1: TMenuItem;
+    DATABARANG1: TMenuItem;
+    DATAPENGGUNA1: TMenuItem;
+    TRANSAKSI1: TMenuItem;
+    act6: TAction;
+    PENJUALAN1: TMenuItem;
+    LAPORAN1: TMenuItem;
+    act7: TAction;
+    LAPORANPENJUALAN1: TMenuItem;
+    act8: TAction;
+    DATAPENJUALAN1: TMenuItem;
+    Action1: TAction;
+    SETTINGUSER1: TMenuItem;
+    procedure act4Execute(Sender: TObject);
+    procedure act5Execute(Sender: TObject);
+    procedure act6Execute(Sender: TObject);
+    procedure act8Execute(Sender: TObject);
+    procedure act7Execute(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormUtama: TFormUtama;
+
+implementation
+uses Udatabarang,Upengguna,Upenjualan, Ujual, Ucetak, ;
+
+{$R *.dfm}
+
+procedure TFormUtama.act4Execute(Sender: TObject);
+begin
+FDataBarang:=TFDataBarang.Create(Application);
+FDataBarang.Show;
+end;
+
+procedure TFormUtama.act5Execute(Sender: TObject);
+begin
+FormPengguna:=TFormPengguna.Create(Application);
+FormPengguna.Show;
+end;
+
+procedure TFormUtama.act6Execute(Sender: TObject);
+begin
+FormPenjualan:=TFormPenjualan.Create(Application);
+FormPenjualan.Show;
+end;
+
+procedure TFormUtama.act8Execute(Sender: TObject);
+begin
+formJual:=TFormJual.Create(Application);
+FormJual.Show;
+end;
+
+procedure TFormUtama.act7Execute(Sender: TObject);
+begin
+formcetak:=TFormCetak.Create(Application);
+FormCetak.Show;
+end;
+
+end.

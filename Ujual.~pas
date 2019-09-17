@@ -1,0 +1,160 @@
+unit Ujual;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, StdCtrls, Grids, DBGrids, DB, Menus;
+
+type
+  TFormJual = class(TForm)
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    label1: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    DateTimePicker1: TDateTimePicker;
+    DBGrid1: TDBGrid;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    ds1: TDataSource;
+    PopupMenu1: TPopupMenu;
+    KlikUntukUbahData1: TMenuItem;
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure Button1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure KlikUntukUbahData1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormJual: TFormJual;
+
+implementation
+
+uses Udm;
+
+{$R *.dfm}
+
+procedure TFormJual.DBGrid1CellClick(Column: TColumn);
+begin
+Edit1.Text:=dm.ADOQuery1.FieldByName('kd_penjualan').AsString;
+Edit2.Text:=dm.ADOQuery1.FieldByName('hrg_satuan').AsString;
+Edit3.Text:=dm.ADOQuery1.FieldByName('total_jual').AsString;
+Edit4.Text:=dm.ADOQuery1.FieldByName('nama_kasir').AsString;
+end;
+
+procedure TFormJual.Button1Click(Sender: TObject);
+begin
+dm.ADOQuery1.Connection:=dm.koneksi;
+with dm.ADOQuery1 do
+begin
+  Active:=False;
+  Close;
+  SQL.Clear;
+  SQL.Text:='insert into tb_penjualan values ('+QuotedStr(Edit1.Text)+
+  ','+QuotedStr(Edit2.Text)+','+QuotedStr(Edit3.Text)+','+QuotedStr(Edit4.Text)+
+  ','+QuotedStr(DateToStr(DateTimePicker1.Date))+')';
+  ExecSQL;
+end;
+begin
+if(application.MessageBox('Ingin menambah data?','Konfirmasi',MB_YesNo)=ID_yes) then
+    begin
+      showmessage('Data berhasil Ditambahkan');
+    end
+  else
+    begin
+      showmessage('Data gagal ditambahkan');
+    end;
+end;
+Button4Click(Sender);
+end;
+
+procedure TFormJual.Button4Click(Sender: TObject);
+begin
+DBGrid1.DataSource:=ds1;
+dm.ADOQuery1.Connection:=dm.koneksi;
+with dm.ADOQuery1 do
+begin
+  Active:=False;
+  Close;
+  SQL.Clear;
+  SQL.Text:='select *from tb_penjualan';
+  ExecSQL;
+  Active:=True;
+end;
+end;
+
+procedure TFormJual.Button2Click(Sender: TObject);
+begin
+try dm.koneksi.BeginTrans;
+with dm.ADOQUERY1 do
+begin
+  SQL.Clear;
+  SQL.Text:='EXEC ubahjual'+Quotedstr (Edit1.Text)+
+  ','+quotedstr(Edit2.Text)+
+  ','+quotedstr(Edit3.Text)+
+  ','+quotedstr(Edit4.Text);
+
+  ExecSQL;
+end;
+ dm.koneksi.CommitTrans;
+ except
+   dm.koneksi.RollbackTrans;
+end;
+ if(application.MessageBox('Yakin untuk mengubah data?','Konfirmasi',MB_YesNo)=ID_yes) then
+    begin
+      showmessage('Data berhasil Diubah');
+    end
+  else
+    begin
+      showmessage('Data gagal diubah');
+    end;
+Button4Click(sender);
+end;
+
+procedure TFormJual.KlikUntukUbahData1Click(Sender: TObject);
+begin
+if dm.ADOQuery1.Active=true then
+begin
+  FormJual.Show;
+  DateTimePicker1.Visible:=False;
+  Label5.Visible:=False;
+	FormJual.FormStyle:=fsStayOnTop;
+  with FormJual do
+  begin
+  	 Edit1.Text:=dm.ADOQuery1['kd_penjualan'] ;
+     Edit2.Text:=dm.ADOQuery1['hrg_satuan'] ;
+     Edit3.Text:=dm.ADOQuery1['total_jual'] ;
+     Edit4.Text:=dm.ADOQuery1['nama_kasir'];
+end;
+end
+else
+begin
+ ShowMessage('gagal loading data ini');
+  end
+end;
+
+
+procedure TFormJual.Button3Click(Sender: TObject);
+begin
+if MessageDlg('Data '+''+dm.ADOQuery1.FieldByName('nama_produk').AsString+
+' ini akan dihapus? Lanjutkan?',MTConfirmation,[MByes,MBno],0)=mrYes then
+begin
+  dm.ADOQuery1.Delete;
+end;
+Button4Click(sender);
+end;
+
+end.

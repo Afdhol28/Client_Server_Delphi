@@ -1,0 +1,25 @@
+program Afdhol_5160311064;
+
+uses
+  Forms,
+  Uutama in '..\CAFE\Uutama.pas' {FormUtama},
+  Udm in '..\CAFE\Udm.pas' {dm: TDataModule},
+  Udatabarang in '..\CAFE\Udatabarang.pas' {FDataBarang},
+  Upengguna in '..\CAFE\Upengguna.pas' {FormPengguna},
+  Upenjualan in '..\CAFE\Upenjualan.pas' {FormPenjualan},
+  Ulogin in '..\CAFE\Ulogin.pas' {FormLogin},
+  Ucetak in '..\CAFE\Ucetak.pas' {FormCetak},
+  Ujual in '..\CAFE\Ujual.pas' {FormJual},
+  Usetuser in 'Usetuser.pas' {FormSetUser},
+  Uloginuser in 'Uloginuser.pas' {Formloguser};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TFormloguser, Formloguser);
+  Application.CreateForm(TFormSetUser, FormSetUser);
+  Application.CreateForm(TFormUtama, FormUtama);
+  Application.Run;
+end.

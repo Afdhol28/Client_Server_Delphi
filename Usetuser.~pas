@@ -1,0 +1,81 @@
+unit Usetuser;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, StdCtrls, DB, ADODB;
+
+type
+  TFormSetUser = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Button1: TButton;
+    DBGrid1: TDBGrid;
+    Label5: TLabel;
+    ADOQuery1: TADOQuery;
+    ds1: TDataSource;
+    ADOQuery2: TADOQuery;
+    procedure Edit4Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormSetUser: TFormSetUser;
+
+implementation
+
+uses Udm;
+
+{$R *.dfm}
+
+procedure TFormSetUser.Edit4Change(Sender: TObject);
+begin
+ if Edit3.Text <> Edit4.Text then
+begin
+    Label5.Font.Color := clRed;
+    Label5.Caption :='password tidak cocok';
+    end
+    else
+begin
+    Label5.Font.Color := clGreen;
+    Label5.Caption :='password cocok';
+    end
+end;
+
+procedure TFormSetUser.Button1Click(Sender: TObject);
+begin
+try dm.koneksi.BeginTrans;
+with ADOQuery2 do
+begin
+  Active:=False;
+  Close;
+  SQL.Clear;
+  SQL.Add('insert into tb_user values('+QuotedStr(Edit1.Text)+','
+          +QuotedStr(Edit2.Text)+','+QuotedStr(Edit3.Text)+')');
+  ExecSQL;
+  end;
+  dm.koneksi.CommitTrans;
+  ADOQuery1.Requery;
+  except dm.koneksi.RollbackTrans;
+  end;
+Edit1.Clear;
+Edit2.Clear;
+Edit3.Clear;
+Edit4.Clear;
+Edit1.SetFocus;
+Label5.Caption :='label5';
+end;
+
+
+end.

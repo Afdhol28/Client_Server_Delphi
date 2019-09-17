@@ -1,0 +1,88 @@
+object FormUtama: TFormUtama
+  Left = 525
+  Top = 220
+  Width = 1088
+  Height = 563
+  Caption = 'FormUtama'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object MainMenu1: TMainMenu
+    Left = 424
+    Top = 8
+    object HOME1: TMenuItem
+      Caption = 'HOME'
+      object LOGOUT1: TMenuItem
+        Action = act2
+      end
+      object KELUAR1: TMenuItem
+        Action = act3
+      end
+    end
+    object master1: TMenuItem
+      Caption = 'MASTER'
+      object DATABARANG1: TMenuItem
+        Action = act4
+      end
+      object DATAPENGGUNA1: TMenuItem
+        Action = act5
+      end
+      object DATAPENJUALAN1: TMenuItem
+        Action = act8
+      end
+    end
+    object TRANSAKSI1: TMenuItem
+      Caption = 'TRANSAKSI'
+      object PENJUALAN1: TMenuItem
+        Action = act6
+      end
+    end
+    object LAPORAN1: TMenuItem
+      Caption = 'LAPORAN'
+      object LAPORANPENJUALAN1: TMenuItem
+        Action = act7
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 512
+    Top = 8
+    object act2: TAction
+      Caption = 'LOGOUT'
+    end
+    object act3: TAction
+      Caption = 'KELUAR'
+    end
+    object act4: TAction
+      Caption = 'DATA BARANG '
+      OnExecute = act4Execute
+    end
+    object act5: TAction
+      Caption = 'DATA PENGGUNA'
+      OnExecute = act5Execute
+    end
+    object act6: TAction
+      Caption = 'PEMBAYARAN'
+      OnExecute = act6Execute
+    end
+    object act7: TAction
+      Caption = 'LAPORAN PENJUALAN'
+      OnExecute = act7Execute
+    end
+    object act8: TAction
+      Caption = 'DATA PENJUALAN'
+      OnExecute = act8Execute
+    end
+  end
+  object ImageList1: TImageList
+    Left = 464
+    Top = 8
+  end
+end

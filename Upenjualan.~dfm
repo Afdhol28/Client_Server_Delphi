@@ -1,0 +1,121 @@
+object FormPenjualan: TFormPenjualan
+  Left = 378
+  Top = 103
+  Width = 1088
+  Height = 563
+  Caption = 'FormPembayaran'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label9: TLabel
+    Left = 272
+    Top = 112
+    Width = 62
+    Height = 13
+    Caption = 'harga satuan'
+  end
+  object Label10: TLabel
+    Left = 272
+    Top = 152
+    Width = 66
+    Height = 13
+    Caption = 'jumlah barang'
+  end
+  object Label11: TLabel
+    Left = 272
+    Top = 192
+    Width = 84
+    Height = 13
+    Caption = 'input pembayaran'
+  end
+  object Edit8: TEdit
+    Left = 384
+    Top = 104
+    Width = 121
+    Height = 21
+    TabOrder = 0
+  end
+  object Edit9: TEdit
+    Left = 384
+    Top = 144
+    Width = 121
+    Height = 21
+    TabOrder = 1
+  end
+  object Edit10: TEdit
+    Left = 384
+    Top = 184
+    Width = 121
+    Height = 21
+    TabOrder = 2
+  end
+  object btn1: TButton
+    Left = 592
+    Top = 104
+    Width = 75
+    Height = 25
+    Caption = 'new'
+    TabOrder = 3
+    OnClick = btn1Click
+  end
+  object Button4: TButton
+    Left = 592
+    Top = 152
+    Width = 75
+    Height = 25
+    Caption = 'hitung'
+    TabOrder = 4
+    OnClick = Button4Click
+  end
+  object Button5: TButton
+    Left = 592
+    Top = 200
+    Width = 75
+    Height = 25
+    Caption = 'keluar'
+    TabOrder = 5
+    OnClick = Button5Click
+  end
+  object GroupBox1: TGroupBox
+    Left = 328
+    Top = 248
+    Width = 289
+    Height = 137
+    Caption = 'GroupBox1'
+    TabOrder = 6
+    object lbl1: TLabel
+      Left = 32
+      Top = 40
+      Width = 49
+      Height = 13
+      Caption = 'total bayar'
+    end
+    object lbl2: TLabel
+      Left = 32
+      Top = 88
+      Width = 48
+      Height = 13
+      Caption = 'kembalian'
+    end
+    object Label12: TLabel
+      Left = 112
+      Top = 40
+      Width = 15
+      Height = 13
+      Caption = 'RP'
+    end
+    object Label13: TLabel
+      Left = 112
+      Top = 88
+      Width = 15
+      Height = 13
+      Caption = 'RP'
+    end
+  end
+end
